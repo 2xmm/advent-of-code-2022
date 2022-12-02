@@ -39,7 +39,7 @@ part 1
         - could spend some time to find cleaner solution but this works for now
 """
 
-SAME_SHAPE_DISTANCE = -23
+SAME_SHAPE_DISTANCE = 23
 
 
 def rock_paper_scissors_part_1(filename: str) -> int:
@@ -60,7 +60,7 @@ def rock_paper_scissors_part_1(filename: str) -> int:
     with open(filename) as file:
         for line in file:
             opponent_shape, your_shape = (shape.strip() for shape in line.split(" "))
-            is_same_shape = ord(opponent_shape) - ord(your_shape) == SAME_SHAPE_DISTANCE
+            is_same_shape = ord(your_shape) - ord(opponent_shape) == SAME_SHAPE_DISTANCE
 
             if is_same_shape:
                 result += 3
