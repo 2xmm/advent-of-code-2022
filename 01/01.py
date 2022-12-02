@@ -67,8 +67,8 @@ def calorie_counting_part_2(filename: str) -> int:
     return sum(heap)
 
 
-result_part_1 = calorie_counting_part_1("1.input")
+result_part_1 = calorie_counting_part_1("01.input")
 print(result_part_1)  # 72240
 
-result_part_2 = calorie_counting_part_2("1.input")
+result_part_2 = calorie_counting_part_2("01.input")
 print(result_part_2)  # 210957
