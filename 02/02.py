@@ -38,11 +38,12 @@ part 1
             (scissors, paper) = 0
         - could spend some time to find cleaner solution but this works for now
 """
-
-SAME_SHAPE_DISTANCE = 23
+from enum import IntEnum, StrEnum
 
 
 def rock_paper_scissors_part_1(filename: str) -> int:
+    SAME_SHAPE_DISTANCE = 23
+
     result = 0
 
     shape_value = {
@@ -72,5 +73,69 @@ def rock_paper_scissors_part_1(filename: str) -> int:
     return result
 
 
+def rock_paper_scissors_part_2(filename: str) -> int:
+    class ShapeValue(IntEnum):
+        ROCK = 1
+        PAPER = 2
+        SCISSORS = 3
+
+    class RoundValue(IntEnum):
+        WIN = 6
+        DRAW = 3
+        LOSE = 0
+
+    class OpponentShape(StrEnum):
+        ROCK = "A"
+        PAPER = "B"
+        SCISSORS = "C"
+
+    class RoundEndCondition(StrEnum):
+        LOSE = "X"
+        DRAW = "Y"
+        WIN = "Z"
+
+    result = 0
+
+    with open(filename) as file:
+        for line in file:
+            opponent_shape, round_end_condition = (
+                shape.strip() for shape in line.split(" ")
+            )
+
+            if round_end_condition == RoundEndCondition.WIN:
+                result += RoundValue.WIN
+                match opponent_shape:
+                    case OpponentShape.ROCK:
+                        result += ShapeValue.PAPER
+                    case OpponentShape.PAPER:
+                        result += ShapeValue.SCISSORS
+                    case OpponentShape.SCISSORS:
+                        result += ShapeValue.ROCK
+
+            elif round_end_condition == RoundEndCondition.LOSE:
+                result += RoundValue.LOSE
+                match opponent_shape:
+                    case OpponentShape.ROCK:
+                        result += ShapeValue.SCISSORS
+                    case OpponentShape.PAPER:
+                        result += ShapeValue.ROCK
+                    case OpponentShape.SCISSORS:
+                        result += ShapeValue.PAPER
+            else:
+                result += RoundValue.DRAW
+                match opponent_shape:
+                    case OpponentShape.ROCK:
+                        result += ShapeValue.ROCK
+                    case OpponentShape.PAPER:
+                        result += ShapeValue.PAPER
+                    case OpponentShape.SCISSORS:
+                        result += ShapeValue.SCISSORS
+
+    return result
+
+
 result_part_1 = rock_paper_scissors_part_1("02.input")
 print(result_part_1)  # 14531
+
+result_part_2 = rock_paper_scissors_part_2("02.input")
+print(result_part_2)  # 11258
