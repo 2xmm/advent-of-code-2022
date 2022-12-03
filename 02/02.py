@@ -134,8 +134,34 @@ def rock_paper_scissors_part_2(filename: str) -> int:
     return result
 
 
+# with inspiration from r/adventofcode
+def rock_paper_scissors_part_2_simplified(filename: str) -> int:
+    result = 0
+    score = {
+        "AX": 3,
+        "AY": 4,
+        "AZ": 8,
+        "BX": 1,
+        "BY": 5,
+        "BZ": 9,
+        "CX": 2,
+        "CY": 6,
+        "CZ": 7,
+    }
+
+    with open(filename) as file:
+        for line in file:
+            round = line.strip().replace(" ", "")
+            result += score[round]
+
+    return result
+
+
 result_part_1 = rock_paper_scissors_part_1("02.input")
 print(result_part_1)  # 14531
 
 result_part_2 = rock_paper_scissors_part_2("02.input")
+print(result_part_2)  # 11258
+
+result_part_2 = rock_paper_scissors_part_2_simplified("02.input")
 print(result_part_2)  # 11258
