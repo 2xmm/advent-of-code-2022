@@ -62,9 +62,8 @@ class SupplyStacks:
                     self.stacks[stack_key].append(char_at_index)
 
     def parse_command(self, line: str) -> tuple:
-        numbers_with_spaces = re.sub(r"[a-zA-Z]", "", line)
-        numbers = re.sub(r" +", ",", numbers_with_spaces.strip())
-        return tuple(map(int, numbers.split(",")))
+        numbers = re.findall(r"\d+", line)
+        return tuple(map(int, numbers))
 
     def apply_command(self, quantity, from_stack, to_stack) -> None:
         assert len(self.stacks[from_stack]) >= quantity
