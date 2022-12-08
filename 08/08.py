@@ -96,14 +96,14 @@ class Solution:
                 right_score += 1
 
             up_score = 0
-            for row in range(tree_row-1, -1, -1):
+            for row in range(tree_row - 1, -1, -1):
                 if grid[row][tree_col] >= height:
                     up_score += 1
                     break
                 up_score += 1
 
             left_score = 0
-            for col in range(tree_col-1, -1, -1):
+            for col in range(tree_col - 1, -1, -1):
                 if grid[tree_row][col] >= height:
                     left_score += 1
                     break
