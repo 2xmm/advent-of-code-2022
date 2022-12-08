@@ -96,6 +96,11 @@ class Solution:
             return total_size
 
         def dfs(node: Node, minimum_folder_size: int, smallest_size: int) -> int:
+
+            # early exit
+            if node.total_size < minimum_folder_size:
+                return smallest_size
+
             if minimum_folder_size <= node.total_size < smallest_size:
                 smallest_size = node.total_size
 
