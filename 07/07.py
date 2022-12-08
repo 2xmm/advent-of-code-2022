@@ -88,10 +88,10 @@ class Solution:
         return result
 
     def part_2(self, filename: str, total_space: int, required_space: int) -> int:
-        def augment_with_folder_size(self, node: Node) -> int:
+        def augment_with_folder_size(node: Node) -> int:
             total_size = node.local_size
             for child in node.children.values():
-                total_size += self.augment_with_folder_size(child)
+                total_size += augment_with_folder_size(child)
             node.total_size = total_size
             return total_size
 
